@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import Sidebar from './components/Sidebar'
 import { Routes, Route } from 'react-router-dom'
@@ -12,6 +12,14 @@ function App() {
   const [lightIsOn, setLightIsOn] = useState(false);
   const [books, setBooks] = useState([]);
 
+
+  useEffect(() => {
+    let result = localStorage.getItem('books')
+    console.log(result);
+    if(result) {
+      setBooks(JSON.parse(result))
+    }
+  })
   return (
     <div id='app-container'>
       <Sidebar lightIsOn={lightIsOn} />

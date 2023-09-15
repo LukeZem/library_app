@@ -18,7 +18,7 @@ const SingleBook = ({ books }) => {
     let myBook = books.find((book) => book.id === bookIdFromURL);
     console.log(myBook);
     setBookToShow(myBook);
-  }, []);
+  }, [books]);
 
   //3.
   return (
