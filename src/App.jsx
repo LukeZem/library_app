@@ -22,8 +22,8 @@ function App() {
         />}
         />
         <Route path="/new" element={<NewBook books={books} setBooks={setBooks} />} />
-        <Route path="/library" element={<Library />} />
-        <Route path="/single_book" element={<SingleBook />} />
+        <Route path="/library" element={<Library books={books}/>} />
+        <Route path="/single_book" element={<SingleBook books={books}/>} />
 
       </Routes>
     </div>

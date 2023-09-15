@@ -7,10 +7,12 @@ const NewBook = ({ books, setBooks }) => {
     const [title, setTitle] = useState("")
     const [author, setAuthor] = useState("")
     const [pages, setPages] = useState(1)
+    const [submitSuccess, setSubmitSuccess] = useState(false);
 
     //handle change functions
     const handleTitleChange = (e) => {
         setTitle(e.target.value)
+        setSubmitSuccess(false);
     }
     const handleAuthorChange = (e) => {
         setAuthor(e.target.value)
@@ -20,24 +22,40 @@ const NewBook = ({ books, setBooks }) => {
             setPages(e.target.value)
         }
     }
+
+    function generateID(length = 10) {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+        for (let i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        return result;
+    }
+
     const handleSubmit = (e) => {
-        e.preventDefault()
-        console.log("trying to submit");
+        console.log("trying to submit")
+        e.preventDefault();
         setBooks([
             ...books,
             {
                 title: title,
                 author: author,
-                pages: pages
+                pages: pages,
+                id: generateID()
             }
         ])
+        setTitle("")
+        setAuthor("")
+        setPages(1)
+        setSubmitSuccess(true)
+
     }
 
     return (
         <div className="page-container">
 
             <h2>Enter a new book!</h2>
-
+            {submitSuccess ? <p style={{ color: "green" }}>Your books was submitted!</p> : <></>}
             <form className="flex-form" onSubmit={handleSubmit}>
                 <label htmlFor='title'>
                     Title
